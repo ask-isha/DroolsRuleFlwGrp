@@ -6,12 +6,44 @@ package com.spacetwentyone;
 
 public class StudentMarks implements java.io.Serializable {
 
-    static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-    public StudentMarks() {
-    }
+	private java.lang.Integer rollNo;
+	private java.lang.String name;
+	private java.lang.Integer semesterMarks;
 
+	public StudentMarks() {
+	}
 
+	public java.lang.Integer getRollNo() {
+		return this.rollNo;
+	}
 
+	public void setRollNo(java.lang.Integer rollNo) {
+		this.rollNo = rollNo;
+	}
+
+	public java.lang.String getName() {
+		return this.name;
+	}
+
+	public void setName(java.lang.String name) {
+		this.name = name;
+	}
+
+	public java.lang.Integer getSemesterMarks() {
+		return this.semesterMarks;
+	}
+
+	public void setSemesterMarks(java.lang.Integer semesterMarks) {
+		this.semesterMarks = semesterMarks;
+	}
+
+	public StudentMarks(java.lang.Integer rollNo, java.lang.String name,
+			java.lang.Integer semesterMarks) {
+		this.rollNo = rollNo;
+		this.name = name;
+		this.semesterMarks = semesterMarks;
+	}
 
 }
