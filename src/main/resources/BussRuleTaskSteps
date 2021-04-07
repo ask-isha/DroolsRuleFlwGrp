@@ -1,0 +1,75 @@
+RULE FLOW GROUP:
+Step1:DataObject:
+-------------------------
+grade/String
+name/String
+rollNo/Integer
+semesterMarks/Integer
+
+Step2:Bussiness Prc:
+-------------------------
+PV:
+student com.spacetwentyone.StudentMarks
+grade String
+
+ScriptTask:
+com.spacetwentyone.StudentMarks stud = new com.spacetwentyone.StudentMarks();
+stud.setName("Jishnu");
+stud.setRollNo(10);
+stud.setSemesterMarks(90);
+kcontext.setVariable("student", stud);
+
+BRT:
+Name:StudentMarksRule Evaluation
+Rule Language:DRL
+Rule Flow Group
+StudentMarksRule
+ONEntry:System.out.println("on entry for rule execution");
+ONExit:
+System.out.println("on exit after rule execution");
+System.out.println("Student grade :: "+student.getGrade());
+kcontext.setVariable("grade",(java.lang.String)student.getGrade());
+Data Assignment:
+IN
+student com.spacetwentyone.StudentMarks.StudentMarks student
+OUT 
+student com.spacetwentyone.StudentMarks.StudentMarks student
+
+Step 3 GDST:
+-------------------------
+package com.spacetwentyone;
+
+//from row number: 1
+rule "Row 1 RuleEvaluation"
+	ruleflow-group "StudentMarksRule"
+	activation-group "first-hit-policy-group RuleEvaluation"
+	dialect "mvel"
+	when
+		student : StudentMarks( semesterMarks : semesterMarks >= 85 , semesterMarks <= 100 )
+	then
+		student.setGrade( "A" );
+end
+
+//from row number: 2
+rule "Row 2 RuleEvaluation"
+	ruleflow-group "StudentMarksRule"
+	activation-group "first-hit-policy-group RuleEvaluation"
+	dialect "mvel"
+	when
+		student : StudentMarks( semesterMarks : semesterMarks >= 70 , semesterMarks <= 85 )
+	then
+		student.setGrade( "B" );
+end
+
+//from row number: 3
+rule "Row 3 RuleEvaluation"
+	ruleflow-group "StudentMarksRule"
+	activation-group "first-hit-policy-group RuleEvaluation"
+	dialect "mvel"
+	when
+		student : StudentMarks( semesterMarks : semesterMarks >= 65 , semesterMarks <= 70 )
+	then
+		student.setGrade( "C" );
+end
+---------
+Finally step: run the business process from business-central
