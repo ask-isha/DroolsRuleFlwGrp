@@ -12,6 +12,8 @@ public class StudentMarks implements java.io.Serializable {
 	private java.lang.String name;
 	private java.lang.Integer semesterMarks;
 
+	private java.lang.String grade;
+
 	public StudentMarks() {
 	}
 
@@ -39,11 +41,20 @@ public class StudentMarks implements java.io.Serializable {
 		this.semesterMarks = semesterMarks;
 	}
 
+	public java.lang.String getGrade() {
+		return this.grade;
+	}
+
+	public void setGrade(java.lang.String grade) {
+		this.grade = grade;
+	}
+
 	public StudentMarks(java.lang.Integer rollNo, java.lang.String name,
-			java.lang.Integer semesterMarks) {
+			java.lang.Integer semesterMarks, java.lang.String grade) {
 		this.rollNo = rollNo;
 		this.name = name;
 		this.semesterMarks = semesterMarks;
+		this.grade = grade;
 	}
 
 }
